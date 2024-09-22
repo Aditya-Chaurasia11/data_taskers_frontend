@@ -12,7 +12,7 @@ import "./contactInfo.css";
 
 function ContactInfo() {
   const { id } = useParams();
-  const [contact, setContact] = useState(null); // State to hold contact data
+  const [contact, setContact] = useState(null);
   const navigate = useNavigate();
   const [otp] = useState(
     Math.floor(100000 + Math.random() * 900000).toString()
@@ -32,8 +32,10 @@ function ContactInfo() {
   useEffect(() => {
     const fetchContact = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/contacts`);
-        setContact(response.data.find((c) => c._id === id)); // Find contact by ID
+        const response = await axios.get(
+          `https://data-taskerbackend.onrender.com/contacts`
+        );
+        setContact(response.data.find((c) => c._id === id));
       } catch (error) {
         console.error("Error fetching contact:", error);
       }
@@ -43,14 +45,14 @@ function ContactInfo() {
   }, [id]);
 
   if (!contact) {
-    return <div>Loading...</div>; // Show loading state while fetching
+    return <div>Loading...</div>;
   }
 
   const sendMessage = async () => {
-    if (!contact) return; // Prevent sending message if contact isn't loaded
+    if (!contact) return;
 
     try {
-      await axios.post("http://localhost:5000/send-sms", {
+      await axios.post("https://data-taskerbackend.onrender.com/send-sms", {
         message,
         phoneNumber: contact.phoneNumber,
         contactName: contact.name,
@@ -59,7 +61,7 @@ function ContactInfo() {
       navigate("/messages");
     } catch (err) {
       alert("Error sending message");
-      console.error(err); // Log the error for debugging
+      console.error(err);
     }
   };
 
@@ -67,8 +69,8 @@ function ContactInfo() {
     <div className="contactInfo_container">
       <h2 className="contactInfo_heading">Contact Info</h2>
       <div className="contactInfo_body">
-        <p>Name: {contact.name}</p> {/* Updated to display 'name' */}
-        <p>Phone: {contact.phoneNumber}</p> {/* Updated to 'phoneNumber' */}
+        <p>Name: {contact.name}</p>
+        <p>Phone: {contact.phoneNumber}</p>
         <Button variant="contained" color="primary" onClick={handleClickOpen}>
           Send Message
         </Button>

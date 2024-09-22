@@ -23,15 +23,13 @@ function ContactList() {
   const handleClose = () => {
     const data = {
       name: name,
-      phoneNumber: phone, // Use 'phoneNumber' to match your backend schema
+      phoneNumber: phone, 
     };
 
-    // Add logic to add contact
     axios
-      .post("http://localhost:5000/contacts", data)
+      .post("https://data-taskerbackend.onrender.com/contacts", data)
       .then((res) => {
         console.log("Contact added:", res.data);
-        // After adding the contact, fetch updated contacts
         fetchContacts();
       })
       .catch((err) => console.error("Error adding contact:", err));
@@ -41,13 +39,13 @@ function ContactList() {
 
   const fetchContacts = () => {
     axios
-      .get("http://localhost:5000/contacts")
+      .get("https://data-taskerbackend.onrender.com/contacts")
       .then((res) => setContacts(res.data))
       .catch((err) => console.error(err));
   };
 
   useEffect(() => {
-    fetchContacts(); // Fetch contacts when the component mounts
+    fetchContacts(); 
   }, []);
 
   return (
