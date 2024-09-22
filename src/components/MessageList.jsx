@@ -27,7 +27,7 @@ function MessageList() {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/sent-messages");
+        const response = await axios.get("https://data-taskerbackend.onrender.com/sent-messages");
         const data = response.data;
         setMessages(data);
       } catch (error) {
