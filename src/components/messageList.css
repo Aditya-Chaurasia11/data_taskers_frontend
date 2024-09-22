@@ -1,0 +1,17 @@
+.messageList_container {
+  padding: 3rem 6.7rem;
+}
+
+.messageList_heading {
+  font-size: 40px;
+  font-weight: 600;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.messageList_body {
+  margin-top: 50px;
+}
+
+.messageList_item {
+  margin-top: 10px;
+}
